@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Love Wrapped 🎧 · Made by @hack.n.code</title>
+<meta name="description" content="Your 2026 Love Wrapped is ready 💚 A Spotify-Wrapped-style love story: minutes in my head, top artist YOU, top 5 memories, our song and your Wrapped card.">
+<meta property="og:title" content="Your 2026 Love Wrapped is ready 💚">
+<meta property="og:description" content="Top artist: YOU. Tap to see your year in love 🎧">
+<meta name="theme-color" content="#07070d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<button id="musicBtn" class="music" aria-label="Music on/off">🔇</button>
+
+<!-- INTRO -->
+<section id="intro" class="screen show">
+  <div class="logo"><span class="lg-ic">🎧</span><span>Love Wrapped</span></div>
+  <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="intro-txt">
+    <div class="it1 rise" style="--d:.15s">Your <b>2026</b></div>
+    <div class="it2 rise" style="--d:.35s"><span class="grad">Love Wrapped</span></div>
+    <div class="it3 rise" style="--d:.55s">is ready,</div>
+    <div class="it4 rise pop" style="--d:.8s"><span class="nm grad2" data-name>my love</span> 💚</div>
+  </div>
+  <button id="startBtn" class="btn primary pulse rise" style="--d:1.1s">Tap to start ▶</button>
+  <button id="makeBtn1" class="btn ghost rise" style="--d:1.3s">✨ Make your own Wrapped</button>
+  <div class="foot">Made by <b>@hack.n.code</b></div>
+</section>
+
+<!-- STORY -->
+<section id="story" class="screen">
+  <div class="sbar" id="sbar"></div>
+  <div class="shead"><span class="av">💚</span><span class="sh-t">Love Wrapped <b>2026</b></span></div>
+  <div class="slides" id="slides">
+
+    <div class="slide" data-theme="0">
+      <div class="kicker rise" style="--d:.1s">You lived in my head</div>
+      <div class="huge counter" id="minCount">0</div>
+      <div class="sub rise" style="--d:.5s">minutes this year 🧠</div>
+      <div class="note rise" style="--d:1.6s">That's every. single. minute. 🥹</div>
+    </div>
+
+    <div class="slide" data-theme="1">
+      <div class="kicker rise" style="--d:.1s">Your Top Artist</div>
+      <div class="vwrap"><canvas class="vinyl" id="vinyl1"></canvas></div>
+      <div class="mega grad3 zoom" style="--d:.6s">YOU</div>
+      <div class="sub rise" style="--d:1s">#1 in my heart · 365 days straight 🏆</div>
+    </div>
+
+    <div class="slide" data-theme="2">
+      <div class="kicker rise" style="--d:.1s">Your Top 5 Songs</div>
+      <div class="sub2 rise" style="--d:.2s">aka our best memories 🎶</div>
+      <ol class="top5" id="top5"></ol>
+    </div>
+
+    <div class="slide" data-theme="3">
+      <div class="kicker rise" style="--d:.1s">Your Top Genre</div>
+      <div class="mega2 grad4 zoom" style="--d:.35s">Pure Love 💗</div>
+      <div class="mix" id="mix"></div>
+    </div>
+
+    <div class="slide" data-theme="4">
+      <div class="kicker rise" style="--d:.1s">Your listening personality</div>
+      <div class="pcard flipin" style="--d:.35s">
+        <div class="pc-ic">♾️</div>
+        <div class="pc-t">The Forever Kind</div>
+        <div class="pc-d">You never skip. You never shuffle. You keep one person on repeat. Forever.</div>
+      </div>
+      <div class="chips"><span class="chip rise" style="--d:1.1s">Loyal 💚</span><span class="chip rise" style="--d:1.3s">Clingy (cutely) 🥹</span><span class="chip rise" style="--d:1.5s">Hopeless romantic 🌹</span></div>
+    </div>
+
+    <div class="slide" data-theme="5">
+      <div class="kicker rise" style="--d:.1s">Times I thought of you</div>
+      <div class="sub2 rise" style="--d:.2s">by month · spoiler: it never stopped</div>
+      <div class="chart" id="chart"></div>
+    </div>
+
+    <div class="slide" data-theme="6">
+      <div class="kicker rise" style="--d:.1s">Most replayed moment</div>
+      <div class="polaroid drop" style="--d:.3s"><canvas id="polCv"></canvas><div class="pol-cap">the day we met 💚</div></div>
+      <div class="replays rise" style="--d:1.1s"><b>9,999+</b> replays</div>
+    </div>
+
+  </div>
+  <div class="taphint" id="tapHint">tap to continue ›</div>
+</section>
+
+<!-- PLAYER -->
+<section id="player" class="screen">
+  <div class="ph"><span class="ph-k">NOW PLAYING</span><span class="ph-s">from Love Wrapped 2026</span></div>
+  <div class="vbox" id="vbox"><canvas class="vinyl" id="vinyl2"></canvas></div>
+  <div class="trow">
+    <div class="tt"><div class="t1">Our Song 💚</div><div class="t2">You &amp; Me · 2026</div></div>
+    <button id="likeBtn" class="like" aria-label="Like">🤍</button>
+  </div>
+  <canvas id="wave"></canvas>
+  <div class="times"><span id="tNow">1:12</span><span>3:45</span></div>
+  <div class="lyrics" id="lyrics"></div>
+  <div class="ctrl">
+    <button class="cb" id="prevSong" aria-label="Previous">⏮</button>
+    <button class="cb play" id="playBtn" aria-label="Play/Pause">⏸</button>
+    <button class="cb" id="nextSong" aria-label="Next">⏭</button>
+  </div>
+  <button id="toCard" class="btn primary">Open our Wrapped ✨</button>
+</section>
+
+<!-- FINALE -->
+<section id="finale" class="screen">
+  <div class="cardwrap"><div class="wcard" id="wcard">
+    <div class="wc-top"><span>🎧 LOVE WRAPPED</span><span>2026</span></div>
+    <div class="wc-name"><span data-name>my love</span>'s year in love</div>
+    <div class="wc-grid">
+      <div class="st"><div class="sl">Minutes 🧠</div><div class="sv nw">525,600</div></div>
+      <div class="st"><div class="sl">Top Artist</div><div class="sv nw">YOU 💚</div></div>
+      <div class="st"><div class="sl">Top Song</div><div class="sv sm" id="cardSong">Our first call</div></div>
+      <div class="st"><div class="sl">Top Genre</div><div class="sv sm nw">Pure Love 💗</div></div>
+    </div>
+    <div class="st wide"><div class="sl">Listening personality</div><div class="sv pers">The Forever Kind ♾️</div></div>
+    <div class="wc-foot">@hack.n.code · lovewrapped</div>
+  </div></div>
+  <div class="forever"><span class="fq">Same time next year?</span> <span class="fa">Forever. 💚</span></div>
+  <div class="fbtns">
+    <button id="dlBtn" class="btn sm2 primary">⬇️ Save card</button>
+    <button id="waBtn" class="btn sm2 wa">💬 WhatsApp</button>
+    <button id="makeBtn2" class="btn sm2 ghost">✨ Make yours</button>
+    <button id="replayBtn" class="btn sm2 ghost">🔁 Replay</button>
+  </div>
+  <div class="foot">Made by <b>@hack.n.code</b></div>
+</section>
+
+<!-- MAKE YOUR OWN -->
+<div id="makeModal" class="modal hide">
+  <div class="mbox">
+    <button class="mx" id="mClose" aria-label="Close">✕</button>
+    <div class="mt">Make your own Wrapped ✨</div>
+    <label>Their pet name<input id="mName" maxlength="20" placeholder="sweetheart" autocomplete="off"></label>
+    <label>Your top memory together<input id="mMem" maxlength="40" placeholder="Late night chai" autocomplete="off"></label>
+    <button id="mGo" class="btn primary">Create my Wrapped 💚</button>
+    <div id="mOut" class="mout hide">
+      <div class="mlink" id="mLink"></div>
+      <div class="mrow"><button id="mWa" class="btn wa">💬 Send on WhatsApp</button><button id="mCopy" class="btn ghost">📋 Copy link</button></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="fx"></canvas>
+<div id="taps"></div>
+<script src="app.js"></script>
+</body>
+</html>
